@@ -207,18 +207,24 @@ for i in netstat_output_list:
 
         protocol = entry[0]  # The first part is the protocol. If you couldn't tell
 
-        # Checking the local addresses
+        # Checking the local or unspecified addresses
         if entry[1][0] == "[":  # If IPv6
             port = entry[1][entry[1].find("]:") + 2:]
             if entry[1][:entry[1].find("]:") + 1] == "[::]":  # If it's an unspecified IP
                 protocol = protocol + " UNSPECIFIED"
                 if ignore_unspecified:
                     continue
+            if entry[1][:entry[1].find("]:") + 1] == "[::1]":  # If it's an unspecified IP
+                if ignore_local:
+                    continue
         else:
             port = entry[1][entry[1].find(":") + 1:]
             if entry[1][:entry[1].find(":")] == "0.0.0.0":  # If it's an unspecified IP
                 protocol = protocol + " UNSPECIFIED"
                 if ignore_unspecified:
+                    continue
+            if entry[1][:4] == "127.":  # If it's an unspecified IP
+                if ignore_local:
                     continue
 
         # Checking the foreign address
