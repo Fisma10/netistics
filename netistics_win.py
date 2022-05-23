@@ -167,10 +167,6 @@ def is_private_ip(ip):
 
 # --- END FUNCTIONS --- #
 
-# User cli argument flag defaults
-ignore_local = True
-ignore_unspecified = True
-
 """
 
 Checking current connections via netstat
