@@ -219,9 +219,9 @@ for i in netstat_output_list:
     protocol = entry[0]
     port = entry[3][entry[3].rfind(":") + 1:]
     local_address = entry[3]
-    if local_address[:4] == "127." or local_address[:local_address.rfind(":")] == "::1" and ignore_local:
+    if (local_address[:4] == "127." or local_address[:local_address.rfind(":")] == "::1") and ignore_local:
         continue
-    elif local_address[:local_address.rfind(":")] == "0.0.0.0" or local_address[:local_address.rfind(":")] == "::" and ignore_unspecified:
+    elif (local_address[:local_address.rfind(":")] == "0.0.0.0" or local_address[:local_address.rfind(":")] == "::") and ignore_unspecified:
         continue
     connection = entry[4]
     if connection[:4] == "127." or connection[:connection.rfind(":")] == "::1":
