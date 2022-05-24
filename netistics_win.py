@@ -396,7 +396,7 @@ for i in startup_locations:
 
     for j in reg_output_list[2:-2]:  # Each key minus some extra unneeded text
         segments = j.split("    ")[1:]
-        print(" - " + segments[0] + " - \n")
+        print("[" + segments[0] + "]\n")
         print("Executable location: " + segments[2])
         get_process_info(segments[2][segments[2].rfind("\\") + 1:segments[2].find(".exe") + 4]) # Find the exe file
         print("")
